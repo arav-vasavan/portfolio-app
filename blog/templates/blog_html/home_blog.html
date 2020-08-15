@@ -1,0 +1,29 @@
+{% extends 'html_files/base.html' %}
+
+{% block content %}
+
+
+<h1 id="blogtitle" class="font-weight-bold text-center">Welcome to Blog home page.!!!@@###$$!!!By Arvind</h1>
+
+<h3 class="text-center mb-5">Arvind Vasavan has written {{blogs.count}} blog{{blogs.count|pluralize}}.</h3>
+
+<!-- {{blogs.count}} ka use number of blogs dikhane ke liye kiye hai aur blogs.count me jo blogs for loop
+    me use kiye the woi hai and pluralize ka use kiye taaki counting bdhe to waha show ho uss hisab se.  -->
+    
+    {% for b in blogs %}
+<div class="row justify-content-center my-3">
+  <div class="col-md-10">
+    <a href="{% url 'blog_app:detail' b.id %}">
+      <h2>{{ b.title }}</h2>   </a>
+
+    <!--isme <a> tag ke through link kiye hai detail.html file ko-->
+    <!-- blog_app:detail isliye likhe hai taaki pata chle blog app ke detail page hai, kyuki future me 
+    aur bhi detail wale pages add krna hua to pata chl jyga konse page ka detail kaha par hai-->   
+    
+    
+    <h5 class="text-muted">{{ b.date|date:'M d, Y'|upper }}</h5>
+    <h4>{{ b.description|striptags|truncatechars:500 }}</h4>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
